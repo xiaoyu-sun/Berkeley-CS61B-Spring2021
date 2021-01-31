@@ -113,12 +113,62 @@ public class Model extends Observable {
         // TODO: Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
+//        board.setViewingPerspective(side);
+        int size = board.size();
+        board.setViewingPerspective(side);
+        for (int col = 0; col < size; col++) {
+            boolean merged = false;
+            boolean hasPredecessor = false;  // do we need to check against previous tile for a merge
+            int destination = size - 1;
+            for (int row = size - 1; row >= 0; row--) {
+                if (board.tile(col, row) == null) {
+                    continue;
+                }
+                else if (row == destination) {
+                    hasPredecessor = true;
+                    continue;
+                }
+                else if (board.tile(col, destination) != null) {
+                    if (board.tile(col, destination).value() != board.tile(col, row).value()) {
+                        destination -= 1;
+                        if (row < destination) {
+                            merged = board.move(col, destination, board.tile(col, row));
+                            changed = true;
+                        }
+                        hasPredecessor = true;
+                        continue;
+                    }
+                }
+                // If the current tile does not meet any of the previous conditions,
+                // it means we definitely need to move this tile,
+                // either to an empty space or to merge with its predecessor
+                merged = board.move(col, destination, board.tile(col, row));
+                changed = true;
+                if (merged) {
+                    score += board.tile(col, destination).value();
+                    hasPredecessor = false;
+                    destination -= 1;
+                }
+                else {
+                    hasPredecessor = true;
+                }
+
+            }
+
+        }
+
+        board.setViewingPerspective(Side.NORTH);
 
         checkGameOver();
         if (changed) {
             setChanged();
         }
         return changed;
+    }
+
+    /** Helper method? */
+    private boolean tileOneColumn(int col) {
+        return false;
     }
 
     /** Checks if the game is over and sets the gameOver variable

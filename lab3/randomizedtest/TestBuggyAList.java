@@ -42,7 +42,7 @@ public class TestBuggyAList {
                 int randVal = StdRandom.uniform(0, 100);
                 correct.addLast(randVal);
                 broken.addLast(randVal);
-                System.out.println("addLast(" + randVal + ")");
+//                System.out.println("addLast(" + randVal + ")");
             } else if (operationNumber == 1) {
                 // size
                 assertEquals(correct.size(), broken.size());

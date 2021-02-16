@@ -53,5 +53,33 @@ public class LinkedListDeque<T> {
         System.out.println("Mason");
     }
 
+    public T removeFirst() {
+        if (size == 0) {
+            return null;
+        }
+        T firstItem = sentinel.next.item;
+        // The next of sentinel node should now point to the original second node
+        sentinel.next = sentinel.next.next;
+        // The prev of the original second node should now point to sentinel
+        sentinel.next.prev = sentinel;
+        size -= 1;
+
+        return firstItem;
+    }
+
+    public T removeLast() {
+        if (size == 0) {
+            return null;
+        }
+        T lastItem = sentinel.prev.item;
+        // The prev of sentinel should now point to original second to last node
+        sentinel.prev = sentinel.prev.prev;
+        // The next of original second to last node should now point to sentinel
+        sentinel.prev.next = sentinel;
+        size -= 1;
+
+        return lastItem;
+    }
+
 
 }

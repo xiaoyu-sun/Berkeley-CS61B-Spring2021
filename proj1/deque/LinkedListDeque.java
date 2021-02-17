@@ -50,7 +50,12 @@ public class LinkedListDeque<T> {
     }
 
     public void printDeque() {
-        System.out.println("Mason");
+        Node p = sentinel;
+        while (p.next != sentinel) {
+            p = p.next;
+            System.out.print(p.item + " ");
+        }
+        System.out.println();
     }
 
     public T removeFirst() {
@@ -81,5 +86,32 @@ public class LinkedListDeque<T> {
         return lastItem;
     }
 
+    public T get(int index) {
+        if (index > size - 1) {
+            return null;
+        }
+        Node p = sentinel.next;
+        while (index > 0) {
+            p = p.next;
+            index -= 1;
+        }
+        return p.item;
+    }
+
+    /** Helper method for getRecursive(int index). Returns the item at location index from start node. */
+    private T getRecursive(Node start, int index) {
+        if (index == 0) {
+            return start.item;
+        } else {
+            return getRecursive(start.next, index - 1);
+        }
+    }
+
+    public T getRecursive(int index) {
+        if (index > size - 1) {
+            return null;
+        }
+        return getRecursive(sentinel.next, index);
+    }
 
 }

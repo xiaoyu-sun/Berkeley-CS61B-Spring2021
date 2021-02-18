@@ -70,8 +70,14 @@ public class ArrayDeque<T> {
         if (nextFirst >= items.length) {
             nextFirst = 0;
         }
+        T itemToRemove = items[nextFirst];
         items[nextFirst] = null;
         size -= 1;
         checkCut();
+        return itemToRemove;
+    }
+
+    public T removeLast() {
+
     }
 }

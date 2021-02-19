@@ -78,6 +78,29 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
+        if (size == 0) {
+            return null;
+        }
+        nextLast -= 1;
+        if (nextLast < 0) {
+            nextLast = items.length - 1;
+        }
+        T itemToRemove = items[nextLast];
+        items[nextLast] = null;
+        size -= 1;
+        checkCut();
+        return itemToRemove;
+    }
 
+    public T get(int index) {
+        if (index > size - 1) {
+            return null;
+        }
+        // calculate the target location in the underlying array
+        int location = nextFirst + 1 + index;
+        if (location >= items.length) {
+            location -= items.length;
+        }
+        return items[location];
     }
 }

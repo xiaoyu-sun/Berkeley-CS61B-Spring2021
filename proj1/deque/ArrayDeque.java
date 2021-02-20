@@ -14,24 +14,18 @@ public class ArrayDeque<T> {
         items = (T[]) new Object[8];
     }
 
-    public void resize(int capacity) {
+    public void expand() {
         return;  // TO BE IMPLEMENTED
     }
 
-    public void checkFull() {
-        if (size == items.length) {
-            resize(size * 2);
-        }
-    }
-
-    public void checkCut() {
-        if (size < items.length * 0.25) {
-            resize(items.length / 4);
-        }
+    public void contract() {
+        return;
     }
 
     public void addFirst(T item) {
-        checkFull();
+        if (size == items.length) {
+            expand();
+        }
         items[nextFirst] = item;
         size += 1;
         nextFirst -= 1;
@@ -41,7 +35,9 @@ public class ArrayDeque<T> {
     }
 
     public void addLast(T item) {
-        checkFull();
+        if (size == items.length) {
+            expand();
+        }
         items[nextLast] = item;
         size += 1;
         nextLast += 1;
@@ -73,7 +69,9 @@ public class ArrayDeque<T> {
         T itemToRemove = items[nextFirst];
         items[nextFirst] = null;
         size -= 1;
-        checkCut();
+        if (items.length >= 16 && size <= items.length * 0.25) {
+            contract();
+        }
         return itemToRemove;
     }
 
@@ -88,7 +86,9 @@ public class ArrayDeque<T> {
         T itemToRemove = items[nextLast];
         items[nextLast] = null;
         size -= 1;
-        checkCut();
+        if (items.length >= 16 && size <= items.length * 0.25) {
+            contract();
+        }
         return itemToRemove;
     }
 

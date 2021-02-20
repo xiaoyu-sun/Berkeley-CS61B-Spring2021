@@ -31,7 +31,7 @@ public class ArrayDeque<T> {
 
     /** Reduce the length of current underlying array by 75%. */
     public void contract() {
-        T[] a = (T[]) new Object[items.length / 4 + 1]
+        T[] a = (T[]) new Object[items.length / 4 + 1];
         if (nextFirst < nextLast) {
             System.arraycopy(items, nextFirst + 1, a, 0, size);
         } else {
@@ -76,7 +76,10 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
-        return; // TO BE IMPLEMENTED
+        for (int i = 0; i < size; i++) {
+            System.out.print(get(i) + " ");
+        }
+        System.out.println();
     }
 
     public T removeFirst() {

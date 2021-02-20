@@ -15,7 +15,18 @@ public class ArrayDeque<T> {
     }
 
     public void expand() {
-        return;  // TO BE IMPLEMENTED
+        T[] a = (T[]) new Object[size * 2];
+        if (nextLast == 0) {
+            System.arraycopy(items, 0, a, 0, size);
+            items = a;
+            nextLast = size;
+            nextFirst = items.length - 1;
+        } else {
+            System.arraycopy(items, 0, a, 0, nextLast);
+            System.arraycopy(items, nextLast, a, nextLast + size, size - nextLast);
+            items = a;
+            nextFirst += size;
+        }
     }
 
     public void contract() {

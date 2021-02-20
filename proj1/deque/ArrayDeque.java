@@ -14,23 +14,33 @@ public class ArrayDeque<T> {
         items = (T[]) new Object[8];
     }
 
+    /** Doubles the length of current underlying array. */
     public void expand() {
         T[] a = (T[]) new Object[size * 2];
         if (nextLast == 0) {
             System.arraycopy(items, 0, a, 0, size);
-            items = a;
             nextLast = size;
             nextFirst = items.length - 1;
         } else {
             System.arraycopy(items, 0, a, 0, nextLast);
             System.arraycopy(items, nextLast, a, nextLast + size, size - nextLast);
-            items = a;
             nextFirst += size;
         }
+        items = a;
     }
 
+    /** Reduce the length of current underlying array by 75%. */
     public void contract() {
-        return;
+        T[] a = (T[]) new Object[items.length / 4 + 1]
+        if (nextFirst < nextLast) {
+            System.arraycopy(items, nextFirst + 1, a, 0, size);
+        } else {
+            System.arraycopy(items, nextFirst + 1, a, 0, items.length - nextFirst - 1);
+            System.arraycopy(items, 0, a, items.length - nextFirst - 1, nextLast);
+        }
+        items = a;
+        nextFirst = items.length - 1;
+        nextLast = size;
     }
 
     public void addFirst(T item) {

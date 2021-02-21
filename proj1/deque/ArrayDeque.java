@@ -1,6 +1,6 @@
 package deque;
 
-public class ArrayDeque<T> {
+public class ArrayDeque<T> implements Deque<T> {
 
     private int size;
     private int nextFirst;
@@ -126,5 +126,9 @@ public class ArrayDeque<T> {
             location -= items.length;
         }
         return items[location];
+    }
+
+    public boolean equals(Object o) {
+        return false; // TO BE IMPLEMENTED
     }
 }

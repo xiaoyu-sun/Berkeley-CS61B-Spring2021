@@ -1,6 +1,8 @@
 package deque;
 
-public class LinkedListDeque<T> {
+import java.util.Iterator;
+
+public class LinkedListDeque<T> implements Deque<T> {
 
     public class Node {
         public T item;
@@ -112,6 +114,10 @@ public class LinkedListDeque<T> {
             return null;
         }
         return getRecursive(sentinel.next, index);
+    }
+
+    public boolean equals(Object o) {
+        return false; // TO BE IMPLEMENTED
     }
 
 }

@@ -1,5 +1,7 @@
 package deque;
 
+import java.util.Iterator;
+
 public class ArrayDeque<T> implements Deque<T> {
 
     private int size;
@@ -128,6 +130,9 @@ public class ArrayDeque<T> implements Deque<T> {
         return items[location];
     }
 
+    public Iterator<T> iterator() {
+
+    }
     public boolean equals(Object o) {
         return false; // TO BE IMPLEMENTED
     }

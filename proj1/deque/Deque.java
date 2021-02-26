@@ -1,6 +1,8 @@
 package deque;
 
-public interface Deque<T> {
+import java.util.Iterator;
+
+public interface Deque<T> extends Iterable<T>{
 
     void addFirst(T item);
 
@@ -17,6 +19,8 @@ public interface Deque<T> {
     T removeLast();
 
     T get(int index);
+
+    Iterator<T> iterator();
 
     boolean equals(Object o);
 

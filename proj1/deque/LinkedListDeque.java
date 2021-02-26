@@ -15,6 +15,26 @@ public class LinkedListDeque<T> implements Deque<T> {
         }
     }
 
+    private class LinkedListDequeIterator implements Iterator<T>{
+        private int wizPos;
+
+        public LinkedListDequeIterator() {
+            wizPos = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return wizPos < size;
+        }
+
+        @Override
+        public T next() {
+            T returnItem = get(wizPos);
+            wizPos += 1;
+            return returnItem;
+        }
+    }
+
     private int size;
     private Node sentinel;
 
@@ -116,8 +136,22 @@ public class LinkedListDeque<T> implements Deque<T> {
         return getRecursive(sentinel.next, index);
     }
 
+    public Iterator<T> iterator() {
+        return new LinkedListDequeIterator();
+    }
+
     public boolean equals(Object o) {
-        return false; // TO BE IMPLEMENTED
+        if (!(o instanceof Deque)) {
+            return false;
+        }
+        try {
+            Deque<T> newObj = (Deque<T>) o;
+        } catch (Exception e) {
+            return false;
+        }
+        // now we know they are of same type?
+
+        return true;
     }
 
 }

@@ -131,9 +131,61 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     public Iterator<T> iterator() {
-
+        return new ArrayDequeIterator();
     }
+
+    private class ArrayDequeIterator implements Iterator<T> {
+        private int wizPos;
+
+        public ArrayDequeIterator() {
+            wizPos = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return wizPos < size;
+        }
+
+        @Override
+        public T next() {
+            T returnItem = get(wizPos);
+            wizPos += 1;
+            return returnItem;
+        }
+    }
+
     public boolean equals(Object o) {
-        return false; // TO BE IMPLEMENTED
+        if (this == o) {
+            return true;
+        }
+        if (o == null) {
+            return false;
+        }
+//        if (!Deque.class.isAssignableFrom(o.getClass())) {
+//            return false;
+//        }
+        if (!(o instanceof Deque)) {
+            return false;
+        }
+        Deque<?> newObj = (Deque<?>) o;
+        if (this.size() != newObj.size()) {
+            return false;
+        }
+        for (int i = 0; i < this.size(); i++) {
+            if (!get(i).equals(newObj.get(i))) {
+                return false;
+            }
+        }
+//
+//        try {
+//            Deque<T> newObj = (Deque<T>) o;
+//            if (this.size() != newObj.size()) {
+//                return false;
+//            }
+//
+//        } catch (Exception e) {
+//            return false;
+//        }
+        return true;
     }
 }

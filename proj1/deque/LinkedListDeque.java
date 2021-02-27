@@ -15,26 +15,6 @@ public class LinkedListDeque<T> implements Deque<T> {
         }
     }
 
-    private class LinkedListDequeIterator implements Iterator<T>{
-        private int wizPos;
-
-        public LinkedListDequeIterator() {
-            wizPos = 0;
-        }
-
-        @Override
-        public boolean hasNext() {
-            return wizPos < size;
-        }
-
-        @Override
-        public T next() {
-            T returnItem = get(wizPos);
-            wizPos += 1;
-            return returnItem;
-        }
-    }
-
     private int size;
     private Node sentinel;
 
@@ -140,18 +120,58 @@ public class LinkedListDeque<T> implements Deque<T> {
         return new LinkedListDequeIterator();
     }
 
+    private class LinkedListDequeIterator implements Iterator<T>{
+        private int wizPos;
+
+        public LinkedListDequeIterator() {
+            wizPos = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return wizPos < size;
+        }
+
+        @Override
+        public T next() {
+            T returnItem = get(wizPos);
+            wizPos += 1;
+            return returnItem;
+        }
+    }
+
     public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null) {
+            return false;
+        }
+//        if (!Deque.class.isAssignableFrom(o.getClass())) {
+//            return false;
+//        }
         if (!(o instanceof Deque)) {
             return false;
         }
-        try {
-            Deque<T> newObj = (Deque<T>) o;
-        } catch (Exception e) {
+        Deque<?> newObj = (Deque<?>) o;
+        if (this.size() != newObj.size()) {
             return false;
         }
-        // now we know they are of same type?
-
+        for (int i = 0; i < this.size(); i++) {
+            if (!get(i).equals(newObj.get(i))) {
+                return false;
+            }
+        }
+//
+//        try {
+//            Deque<T> newObj = (Deque<T>) o;
+//            if (this.size() != newObj.size()) {
+//                return false;
+//            }
+//
+//        } catch (Exception e) {
+//            return false;
+//        }
         return true;
     }
-
 }

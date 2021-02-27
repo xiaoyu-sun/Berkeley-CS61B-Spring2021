@@ -20,8 +20,8 @@ public interface Deque<T> extends Iterable<T>{
 
     T get(int index);
 
-    Iterator<T> iterator();
+//    Iterator<T> iterator();
 
-    boolean equals(Object o);
+//    boolean equals(Object o);
 
 }

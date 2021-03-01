@@ -89,7 +89,7 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
 
     public T get(int index) {
-        if (index > size - 1) {
+        if (index > size - 1 || index < 0) {
             return null;
         }
         Node p = sentinel.next;

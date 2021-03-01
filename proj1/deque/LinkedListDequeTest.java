@@ -1,5 +1,6 @@
 package deque;
 
+import edu.princeton.cs.algs4.StdRandom;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -133,5 +134,29 @@ public class LinkedListDequeTest {
             assertEquals("Should have the same value", i, (double) lld1.removeLast(), 0.0);
         }
 
+    }
+
+    @Test
+    /* Test the equals method for both deques. */
+    public void equalTest() {
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+        LinkedListDeque<Integer> lld2 = new LinkedListDeque<>();
+        ArrayDeque<Integer> ad1 = new ArrayDeque<>();
+        ArrayDeque<Integer> ad2 = new ArrayDeque<>();
+        for (int i = 0; i < 100; i++) {
+            int randomNumber = StdRandom.uniform(0, 20);
+            lld1.addLast(randomNumber);
+            lld2.addLast(randomNumber);
+            ad1.addLast(randomNumber);
+            ad2.addLast(randomNumber);
+        }
+        assertEquals(lld1, lld2);
+        assertEquals(ad1, ad2);
+        assertEquals(lld1, ad1);  // Note: This should also be equal
+
+        LinkedListDeque<String> lld3 = new LinkedListDeque<>();
+        lld3.addLast("Mason");
+        assertNotEquals(lld1, lld3);
+        assertNotEquals(ad1, lld3);
     }
 }
